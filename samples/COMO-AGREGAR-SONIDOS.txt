@@ -1,0 +1,52 @@
+CÓMO AGREGAR SONIDOS REALES (sampler multisample)
+==================================================
+
+El portal ya tiene un motor de sampler. Para sumar un instrumento real (piano, Rhodes,
+Wurlitzer, etc.) solo hay que dejar los archivos acá y un manifest.json. Aparece SOLO si
+existe; si no, las herramientas usan el sintetizador como fallback.
+
+CARPETA
+-------
+Crear una carpeta por instrumento dentro de /public/samples/ con uno de estos id:
+  - grand   → "Piano de cola"
+  - rhodes  → "Rhodes"
+  - wurli   → "Wurlitzer"
+(podemos agregar más ids cuando quieras)
+
+QUÉ SAMPLES PASAR (ideal)
+-------------------------
+- Notas sueltas (one-shots) del instrumento, cada una sostenida ~2-4 segundos.
+- Una nota cada 3-4 semitonos cubriendo el rango útil. Ej. mínimo decente:
+    C2, F2, A2, C3, E3, A3, C4, F4, A4, C5
+  Con eso ya suena muy bien (el sampler re-afina lo que falta).
+  Cuantas más notas, más realista (menos "estirado").
+- Formato: MP3 (más liviano) o WAV. Mono o estéreo. Volumen parejo entre samples.
+- Nombre del archivo: la nota, ej. c3.mp3, f#3.mp3, bb2.mp3 (o como sea, lo mapeo yo).
+
+MANIFEST (lo armo yo cuando pases los archivos, o seguí este molde)
+-------------------------------------------------------------------
+/public/samples/rhodes/manifest.json:
+
+{
+  "name": "Rhodes",
+  "gain": 0.9,
+  "release": 0.4,
+  "samples": [
+    { "note": "C2",  "file": "c2.mp3" },
+    { "note": "F2",  "file": "f2.mp3" },
+    { "note": "A2",  "file": "a2.mp3" },
+    { "note": "C3",  "file": "c3.mp3" },
+    { "note": "E3",  "file": "e3.mp3" },
+    { "note": "A3",  "file": "a3.mp3" },
+    { "note": "C4",  "file": "c4.mp3" },
+    { "note": "F4",  "file": "f4.mp3" },
+    { "note": "A4",  "file": "a4.mp3" },
+    { "note": "C5",  "file": "c5.mp3" }
+  ]
+}
+
+LICENCIA: usá samples propios o con licencia libre (Freesound CC0, librerías que
+permitan redistribución web). Quedan públicos en el sitio.
+
+Lo usan hoy: Progresiones de Acordes (/acordes) y Círculo de Quintas (/circulo-quintas).
+Más adelante se puede enchufar al resto.
